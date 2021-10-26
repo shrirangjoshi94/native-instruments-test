@@ -37,6 +37,15 @@ class ImportUsersData extends Command
      * Execute the console command.
      *
      * @return void
+     *
+     * @todo test cases
+     * check if firing the command before the db has 0 records and after firing it should have 10 records.
+     * temp db in memory
+     * DB driver sqlite //in phpunitxml
+     *
+     * 1) check if file path exists  then error print assert that error will come
+     * 2) inital 0 after command hit these many records
+     * 3) name same email
      */
     public function handle(): void
     {

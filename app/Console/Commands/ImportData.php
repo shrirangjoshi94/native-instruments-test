@@ -23,22 +23,14 @@ class ImportData extends Command
     protected $description = 'Import the initial data set.';
 
     /**
-     * Create a new command instance.
+     * Execute the console command.
      *
      * @return void
      */
-    public function __construct()
+    public function handle(): void
     {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
-        return Command::SUCCESS;
+        $this->call('import:users-data');
+        $this->call('import:products-data');
+        $this->call('import:users-purchased-products-data');
     }
 }
