@@ -22,7 +22,10 @@ class AuthenticationController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (Hash::check($request->password, $user->password)) {
-            return response()->json(['token' => $user->createToken('access_token')->plainTextToken]);
+            return response()->json(
+                ['token' => $user->createToken('access_token')->plainTextToken],
+                Response::HTTP_CREATED
+            );
         }
 
         return response()->json(['message' => __('auth.password')], Response::HTTP_UNAUTHORIZED);
