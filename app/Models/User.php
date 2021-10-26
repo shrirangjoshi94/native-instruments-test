@@ -39,10 +39,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Product::class, 'user_purchased_products')
             ->withTimestamps();
-
-//        return $this->belongsToMany(Company::class)
-//            ->using(CompanyUser::class)
-//            ->withPivot('id')
-//            ->withTimestamps();
     }
 }

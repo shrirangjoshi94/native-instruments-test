@@ -57,7 +57,7 @@ class ImportUsersPurchasedProductsData extends Command
             $this->importData($row);
         }
 
-        $this->info('Products imported successfully!!');
+        $this->info('User products data imported successfully!!');
     }
 
     /**
