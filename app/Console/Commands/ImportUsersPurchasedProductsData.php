@@ -6,7 +6,6 @@ namespace App\Console\Commands;
 
 use App\Models\{Product, User};
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Storage;
 
 class ImportUsersPurchasedProductsData extends Command
 {
@@ -39,13 +38,13 @@ class ImportUsersPurchasedProductsData extends Command
     {
         $path = self::FILE_PATH . self::FILE_NAME;
 
-        if (!Storage::disk('local')->exists($path)) {
+        if (!file_exists($path)) {
             $this->error('File does not exists');
 
             return;
         }
 
-        $file = fopen(Storage::disk('local')->path($path), "r");
+        $file = fopen($path, "r");
         $header = true;
 
         while ($row = fgetcsv($file, null, ",")) {

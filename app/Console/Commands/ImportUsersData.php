@@ -6,7 +6,7 @@ namespace App\Console\Commands;
 
 use App\Models\User;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\{Hash, Storage};
+use Illuminate\Support\Facades\Hash;
 
 class ImportUsersData extends Command
 {
@@ -37,21 +37,12 @@ class ImportUsersData extends Command
      * Execute the console command.
      *
      * @return void
-     *
-     * @todo test cases
-     * check if firing the command before the db has 0 records and after firing it should have 10 records.
-     * temp db in memory
-     * DB driver sqlite //in phpunitxml
-     *
-     * 1) check if file path exists  then error print assert that error will come
-     * 2) inital 0 after command hit these many records
-     * 3) name same email
      */
     public function handle(): void
     {
         $path = self::FILE_PATH . self::FILE_NAME;
 
-        if (!Storage::disk('local')->exists($path)) {
+        if (!file_exists($path)) {
             $this->error('File does not exists');
 
             return;
@@ -68,7 +59,7 @@ class ImportUsersData extends Command
      */
     private function importData(string $path): void
     {
-        $file = fopen(Storage::disk('local')->path($path), "r");
+        $file = fopen($path, "r");
         $header = true;
         while ($row = fgetcsv($file, null, ",")) {
             if ($header) {
